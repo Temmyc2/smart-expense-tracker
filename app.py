@@ -27,6 +27,29 @@ Session(app)
 db = SQL("sqlite:///expense.db")
 
 
+db.execute("""
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL UNIQUE,
+        hash TEXT NOT NULL,
+        currency TEXT NOT NULL DEFAULT 'USD',
+        email TEXT
+    )
+""")
+
+db.execute("""
+    CREATE TABLE IF NOT EXISTS transactions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        type TEXT NOT NULL,
+        amount REAL NOT NULL,
+        category TEXT NOT NULL,
+        description TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id)
+    )
+""")
+
 types = ["Income", "Expense"]
 
 expense_categories = ["Food(groceries, Dining-out)", "Transportation(car payment, fuel, repairs, public transit)", "Housing(mortgage/rent, property taxes, maintenance)", "Entertainment & hobbies",
