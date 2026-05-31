@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <form action="/register" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Confirm Password" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+    <div>
+        <p>Already have an account? <a href="/login">Login</a></p>
+    </div>
+    <!-- Add this block to your login.html and register.html, below the form -->
+
+<div class="landing-section">
+
+    <div class="landing-hero">
+        <p class="landing-tagline">Take control of your money</p>
+        <p class="landing-sub">Smart Expense Tracker helps you understand where your money goes — so you can track your expenses.</p>
+    </div>
+
+    <div class="landing-features">
+
+        <div class="landing-feature">
+            <div class="feature-icon income-icon">₦</div>
+            <div>
+                <p class="feature-title">Track income & expenses</p>
+                <p class="feature-desc">Log every transaction in seconds. Categorize automatically and see your full financial picture in one place.</p>
+            </div>
+        </div>
+
+        <div class="landing-feature">
+            <div class="feature-icon chart-icon">📊</div>
+            <div>
+                <p class="feature-title">Visual spending insights</p>
+                <p class="feature-desc">Charts that show exactly how you spend — by category and by month — so patterns become obvious.</p>
+            </div>
+        </div>
+
+        <div class="landing-feature">
+            <div class="feature-icon balance-icon">⚖</div>
+            <div>
+                <p class="feature-title">Know your balance always</p>
+                <p class="feature-desc">Your net balance updates in real time. No surprises at the end of the month.</p>
+            </div>
+        </div>
+
+        <div class="landing-feature">
+            <div class="feature-icon secure-icon">🔒</div>
+            <div>
+                <p class="feature-title">Private and secure</p>
+                <p class="feature-desc">Your data belongs to you. Password-protected with encrypted credentials. No ads, no tracking.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="landing-stats">
+        <div class="landing-stat">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Free to use</span>
+        </div>
+        <div class="landing-stat">
+            <span class="stat-number">12+</span>
+            <span class="stat-label">Expense categories</span>
+        </div>
+        <div class="landing-stat">
+            <span class="stat-number">11</span>
+            <span class="stat-label">Currencies supported</span>
+        </div>
+    </div>
+
+</div>
+<a href="/register"><button class="btn btn-primary" type="submit">Get started</button></a>
+<footer class="app-footer">
+    <p>Smart Expense Tracker &copy; 2026 &middot; Built with Flask &middot; <a href="/register">Get Started</a></p>
+    <p><span style="color: blue;">C</span><span style="color: yellow;">S</span><span style="color: green;">5</span><span style="color: red;">0</span><span>x</span> - 2026</p>
+</footer>
+{% endblock%}

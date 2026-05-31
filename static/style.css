@@ -1,0 +1,637 @@
+/* ============================================
+   CSS VARIABLES — light mode defaults
+   ============================================ */
+:root {
+    --bg-primary: #f8f9fa;
+    --bg-secondary: #ffffff;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+
+    --text-primary: #1a1a2e;
+    --text-secondary: #6c757d;
+    --text-muted: #9ca3af;
+
+    --border-color: #e2e8f0;
+    --border-radius: 12px;
+    --border-radius-sm: 8px;
+
+    --income-color: #10b981;
+    --expense-color: #ef4444;
+
+    --accent: #6366f1;
+    --accent-hover: #4f46e5;
+
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --nav-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================
+   DARK MODE — toggled by .dark-mode on body
+   ============================================ */
+body.dark-mode {
+    --bg-primary: #0f0e17;
+    --bg-secondary: #1a1a2e;
+    --bg-card: #16213e;
+    --bg-nav: #16213e;
+
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+
+    --border-color: #2d3748;
+
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --nav-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================
+   BASE
+   ============================================ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--accent-hover);
+}
+
+/* ============================================
+   NAVBAR
+   ============================================ */
+.navbar {
+    background-color: var(--bg-nav) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    box-shadow: var(--nav-shadow);
+    transition: background-color 0.3s;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.navbar-brand .blue  { color: #3b82f6; }
+.navbar-brand .red   { color: #ef4444; }
+.navbar-brand .yellow{ color: #f59e0b; }
+.navbar-brand .green { color: #10b981; }
+
+.nav-link {
+    color: var(--text-secondary) !important;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.nav-link:hover {
+    color: var(--accent) !important;
+}
+
+/* fix navbar toggler icon in dark mode */
+body.dark-mode .navbar-toggler-icon {
+    filter: invert(1);
+}
+
+body.dark-mode .navbar-toggler {
+    border-color: var(--border-color);
+}
+
+/* ============================================
+   FLASH MESSAGES
+   ============================================ */
+.alert {
+    border: none;
+    border-radius: 0;
+    font-size: 0.9rem;
+    padding: 10px 20px;
+}
+
+/* ============================================
+   MAIN CONTAINER
+   ============================================ */
+main.container {
+    max-width: 960px;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+.card-custom,
+.stats-card,
+.chart-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    padding: 1.25rem;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.form-card {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.stats-card {
+    text-align: center;
+    padding: 1.5rem 1rem;
+}
+
+.stats-card h4 {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.stats-card h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.chart-card {
+    padding: 1.25rem;
+}
+
+.chart-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.chart-container {
+    position: relative;
+    height: 220px;
+}
+
+/* ============================================
+   DASHBOARD GREETING
+   ============================================ */
+.opp_stats-card {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.greeting {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* ============================================
+   PAGE TITLES
+   ============================================ */
+.page-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+}
+
+/* ============================================
+   FORMS
+   ============================================ */
+.form-control,
+.form-select {
+    background-color: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+    border-radius: var(--border-radius-sm) !important;
+    padding: 0.5rem 0.75rem;
+    transition: border-color 0.2s, background-color 0.3s;
+    width: 100%;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15) !important;
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: var(--text-muted) !important;
+}
+
+/* dropdown options in dark mode */
+body.dark-mode .form-select option {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn-primary {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9rem;
+    padding: 0.5rem 1.25rem;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+.btn-custom {
+    background-color: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9rem;
+    padding: 0.5rem 1.25rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-custom:hover {
+    background-color: var(--accent);
+    color: #fff;
+}
+
+.inline_buttons {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.inline_buttons a,
+.inline_buttons form {
+    flex: 1;
+    display: flex;
+}
+
+.inline_buttons form button,
+.inline_buttons a button {
+    width: 100%;
+}
+
+/* ============================================
+   TRANSACTION CARDS (history page)
+   ============================================ */
+.transaction-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.6rem;
+    border-radius: var(--border-radius);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
+    cursor: pointer;
+}
+
+.transaction-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+    color: var(--text-primary);
+}
+
+.transaction-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+}
+
+.transaction-dot {
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.transaction-dot.income  { background-color: var(--income-color); }
+.transaction-dot.expense { background-color: var(--expense-color); }
+
+.transaction-info {
+    min-width: 0;
+}
+
+.transaction-category {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 240px;
+}
+
+.transaction-description {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 240px;
+}
+
+.transaction-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    flex-shrink: 0;
+    margin-left: 12px;
+}
+
+.transaction-amount {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.transaction-amount.income  { color: var(--income-color); }
+.transaction-amount.expense { color: var(--expense-color); }
+
+.transaction-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* ============================================
+   INCOME / EXPENSE TEXT (dashboard table)
+   ============================================ */
+.income-text  { color: var(--income-color); font-weight: 600; }
+.expense-text { color: var(--expense-color); font-weight: 600; }
+
+
+/* ============================================
+   SETTINGS PAGE
+   ============================================ */
+.settings-section {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.settings-section h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+/* ============================================
+   DARK MODE TOGGLE SWITCH
+   ============================================ */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 26px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: var(--border-color);
+    border-radius: 26px;
+    transition: 0.3s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+input:checked + .slider {
+    background-color: var(--accent);
+}
+
+input:checked + .slider:before {
+    transform: translateX(22px);
+}
+
+/* ============================================
+   DETAILS PAGE
+   ============================================ */
+#div p {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+#div p:last-child {
+    border-bottom: none;
+}
+
+.details {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    min-width: 160px;
+    margin: 0;
+}
+
+/* ============================================
+   LOGIN / REGISTER PAGES
+   ============================================ */
+main.container .btn-primary {
+    margin-top: 0.5rem;
+}
+
+/* ============================================
+   RESPONSIVE — mobile
+   ============================================ */
+@media (max-width: 576px) {
+    .stats-card h2 {
+        font-size: 1.4rem;
+    }
+
+    .transaction-category,
+    .transaction-description {
+        max-width: 140px;
+    }
+
+    .inline_buttons {
+        flex-direction: column;
+    }
+
+    .form-card {
+        padding: 1rem;
+    }
+
+    .greeting {
+        font-size: 1.2rem;
+    }
+}
+
+
+/* ============================================
+   LANDING SECTION — login & register pages
+   ============================================ */
+
+.landing-section {
+    max-width: 500px;
+    margin: 2.5rem auto 0;
+    text-align: left;
+}
+
+.landing-hero {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.landing-tagline {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.3px;
+}
+
+.landing-sub {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* feature list */
+.landing-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.landing-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.feature-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.income-icon  { background-color: rgba(16, 185, 129, 0.12); color: #10b981; }
+.chart-icon   { background-color: rgba(99, 102, 241, 0.12);  color: #6366f1; }
+.balance-icon { background-color: rgba(245, 158, 11, 0.12);  color: #f59e0b; }
+.secure-icon  { background-color: rgba(59, 130, 246, 0.12);  color: #3b82f6; }
+
+.feature-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 0.2rem;
+}
+
+.feature-desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* stats row */
+.landing-stats {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.25rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+}
+
+.landing-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+}
+
+.landing-stat:not(:last-child) {
+    border-right: 1px solid var(--border-color);
+}
+
+.stat-number {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+/* ========= FOOTER ============= */
+
+.app-footer {
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.app-footer a {
+    color: var(--accent);
+}

@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main%}
+
+    <div>
+        <form action="/history" method="get">
+            <div class="mb-3">
+                <select class="form-select" name="filter">
+                    <option selected value="">Filter</option>
+                    <option value="Expense">Expenses</option>
+                    <option value="Income">Income</option>
+                </select>
+                <button class="btn btn-primary" type="submit">Filter</button>
+            </div>
+            <input id="filter_search" autocomplete="off" class="form-control mx-auto w-auto mb-3 autufocus" name="filter_search" placeholder="Search" type="text">
+        </form>
+    </div>
+    {% if not all_transactions %}
+        <div class="card-custom form-card">
+            <h3>No transactions yet.</h3>
+            <p>Add your first income or expense to get started</p>
+        </div>
+        <div class="inline_buttons settings-section stats-card">
+            <a href="/add_expense"><button type="button" class="btn btn-custom w-100">Add Expense</button></a>
+            <a href="/add_income"><button type="button" class="btn btn-custom w-100">Add Income</button></a>
+        </div>
+    {% else %}
+        {% for transaction in all_transactions %}
+            <a href="/details/{{ transaction.id }}" class="transaction-card">
+                <div class="transaction-left">
+                    <span class="transaction-dot {{ 'income' if transaction.type == 'Income' else 'expense' }}"></span>
+                    <div>
+                        <p class="transaction-category">{{ transaction.category }}</p>
+                        <p class="transaction-description">{{ transaction.description }}</p>
+                    </div>
+                </div>
+                <div class="transaction-right">
+                    <p class="transaction-amount {{ 'income' if transaction.type == 'Income' else 'expense' }}">{{ transaction.amount | format_currency(user_currency) }}</p>
+                    <p class="transaction-date">{{ transaction.created_at }}</p>
+                </div>
+            </a>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

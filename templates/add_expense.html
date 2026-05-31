@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Expense
+{% endblock %}
+
+{% block main%}
+
+    <div class="card-custom form-card">
+        <h2 class="page-title">Add Expense</h2>
+        <form action="/add_expense" method="POST">
+            <div class="mb-3">
+                <select name="type" class="form-select">
+                    <option selected value="">Type</option>
+                    <option value="Expense">Expense</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <input autocomplete="off" autufocus class="form-control mx-auto w-auto mb-3" name="amount" placeholder="Amount" type="number" min="1" step="0.01">
+            </div>
+            <div class="mb-3">
+                <select name="category" class="form-select">
+                    <option selected value="">Category</option>
+                    {% for category in expense_categories %}
+                        <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <input autocomplete="off" autufocus class="form-control mx-auto w-auto" name="description" placeholder="Description" type="text">
+            </div>
+            <div class="inline_buttons">
+                <a href="/"><button type="button" class="btn btn-custom w-100">Back</button></a>
+                <button class="btn btn-custom w-100" type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

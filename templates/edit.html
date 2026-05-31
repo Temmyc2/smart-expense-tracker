@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit
+{% endblock %}
+
+{% block main%}
+
+    <div class="card-custom form-card">
+        <h2 class="page-title">Edit transaction</h2>
+        <form action="/edit/{{ transaction.id }}" method="post">
+            <div class="mb-3">
+                <select name="type" class="form-select">
+                        <option selected value="{{ transaction.type }}">{{ transaction.type }}</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto mb-3" name="amount" value="{{ transaction.amount }}" type="number" min="1" step="0.01">
+            </div>
+            <div class="mb-3">
+                <select class="form-select" name="category">
+                    <option selected value="{{ transaction.category }}">{{ transaction.category }}</option>
+                    {% if transaction["type"] == "Expense" %}
+                        {% for category in expense_categories %}
+                            <option value="{{ category }}">{{ category }}</option>
+                        {% endfor %}
+                    {% else %}
+                        {% for category in income_categories %}
+                            <option value="{{ category }}">{{ category }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+            </div>
+            <div>
+                <input autocomplete="off" autufocus class="form-control mx-auto w-auto mb-3" name="description" value="{{ transaction.description }}" type="text">
+            </div>
+            <div class="inline_buttons">
+                <a href="/details/{{ transaction.id }}"><button type="button" class="btn btn-custom w-100">Back</button></a>
+                <button type="submit" class="btn btn-custom w-100">Save</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

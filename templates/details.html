@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Details
+{% endblock %}
+
+{% block main%}
+
+    <div class="card-custom form-card">
+        <h2 class="page-title">Transaction Details</h2>
+        <div id="div">
+            <p><h4 class="details">Transaction Type: </h4>{{ transaction_details.type }}</p>
+            <p><h4 class="details">Transaction Amount: </h4>{{ transaction_details.amount | format_currency(user_currency) }}</p>
+            <p><h4 class="details">Description: </h4>{{ transaction_details.description }}</P>
+            <p><h4 class="details">Transaction Category: </h4>{{ transaction_details.category }}</p>
+            <p><h4 class="details">Transaction Date: </h4>{{ transaction_details.created_at }}
+
+        </div>
+            <div class="inline_buttons">
+                <a href="/edit/{{ transaction_details['id'] }}"><button type="button" class="btn btn-custom w-100">Edit</button></a>
+                <form action="/delete/{{ transaction_details['id'] }}" method="POST" id="delete_transaction">
+                        <button class="btn btn-custom w-100" type="submit">Delete</button>
+                </form>
+            </div>
+            <div style="margin-top: 0.75rem;">
+                <a href="/history"><button type="button" class="btn btn-custom w-100">Back</button></a>
+            </div>
+    </div>
+
+{% endblock %}

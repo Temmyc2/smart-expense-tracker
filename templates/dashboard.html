@@ -1,0 +1,174 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block main%}
+    <div class="opp_stats-card">
+        <h3 class="greeting">{{ time | greet }}, {{ username }}</h3>
+    </div>
+    {% if total_income or total_expense > 0 %}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <h4>Total Income: </h4>
+                    <hr>
+                    <h2>{{ total_income | format_currency(user_currency) }}</h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <h4>Total Expense: </h4>
+                    <hr>
+                    <h2>{{ total_expense | format_currency(user_currency) }}</h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <h4>Net Balance: </h4>
+                    <hr>
+                    <h2>{{ net_balance | format_currency(user_currency) }}</h2>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="chart-card">
+                        <h4 class="chart-title">Expense Breakdown</h4>
+                        <div class="chart-container">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="chart-card">
+                        <h4 class="chart-title">Monthly Expenses</h4>
+                        <div class="chart-container">
+                            <canvas id="monthlyChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-control mx-auto w-auto">
+                <h4>Recent Transactions</h4>
+            </div>
+                    {% for transaction in recent_transaction %}
+                        <a href="/details/{{ transaction.id }}" class="transaction-card">
+                            <div class="transaction-left">
+                                <span class="transaction-dot {{ 'income' if transaction.type == 'Income' else 'expense' }}"></span>
+                                <div>
+                                    <p class="transaction-category">{{ transaction.category }}</p>
+                                    <p class="transaction-description">{{ transaction.description }}</p>
+                                </div>
+                            </div>
+                            <div class="transaction-right">
+                                <p class="transaction-amount {{ 'income' if transaction.type == 'Income' else 'expense' }}">{{ transaction.amount | format_currency(user_currency) }}</p>
+                                <p class="transaction-date">{{ transaction.created_at }}</p>
+                            </div>
+                        </a>
+                    {% endfor %}
+        <div>
+            <a href="/history"><button class="btn btn-primary" type="submit">View all</button></a>
+        </div>
+    {% else %}
+
+        <div class="card-custom form-card">
+            <h3>No transactions yet.</h3>
+            <p>Add your first income or expense to get started</p>
+        </div>
+        <div class="inline_buttons settings-section stats-card">
+            <a href="/add_expense"><button type="button" class="btn btn-custom w-100">Add Expense</button></a>
+            <a href="/add_income"><button type="button" class="btn btn-custom w-100">Add Income</button></a>
+        </div>
+    {% endif %}
+
+    <script>
+        const monthlyExpense = {{ monthly_expense | tojson }};
+        const categoryData = {{ category_data | tojson }};
+        const monthlyIncome = {{ monthly_income | tojson }};
+    </script>
+    <script>
+        // A pie chart for spending category
+        const categoryCanvas = document.querySelector("#categoryChart")
+
+        new Chart(categoryCanvas, {
+            type: "doughnut",
+            data: {
+                labels: categoryData.map(function(item) { return item.category }),
+                datasets: [{
+                    label: "Spending by Category",
+                    data: categoryData.map(function(item) { return item.total }),
+                    backgroundColor: [
+                        "#6366f1", "#f59e0b", "#10b981",
+                        "#ef4444", "#3b82f6", "#8b5cf6", "#ec4899"
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: document.body.classList.contains("dark-mode")
+                                ? "white"
+                                : "black"
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+    <script>
+        // A bar chart for monthly expenses
+        const monthlyCanvas = document.querySelector("#monthlyChart")
+
+        new Chart(monthlyCanvas, {
+            type: "bar",
+            data: {
+                labels: monthlyExpense.map(function(item) { return item.month }),
+                datasets: [{
+                    label: "Monthly Expense",
+                    data: monthlyExpense.map(function(item) { return item.total }),
+                    backgroundColor:"#3b82f6"
+                },
+                    {
+                        label:"Monthly Income",
+                        data: monthlyIncome.map(function(item) { return item.total }),
+                        backgroundColor: "#ef4444"
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: document.body.classList.contains("dark-mode")
+                                ? "white"
+                                : "black"
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: document.body.classList.contains("dark_mode")
+                                ? "white"
+                                : "black"
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: document.body.classList.contains("dark-mode")
+                                ? "white"
+                                : "black"
+                        }
+                    }
+                }
+            }
+        })
+
+    </script>
+{% endblock %}

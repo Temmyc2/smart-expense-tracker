@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Settings
+{% endblock %}
+
+{% block main%}
+    <div class="card-custom form-card">
+        <h2 class="page-title">Account Settings</h2>
+        <div class="settings-section stats-card">
+            <h4>Appearance</h4>
+            <h4>Dark Mode</h4>
+            <label class="toggle-switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="settings-section stats-card">
+            <h4>Change currency</h4>
+            <form action="/settings" method="POST">
+                <div class="mb-3">
+                    <select class="form-select" name="user_currency">
+                            <option selected value="">Curency</option>
+                            {% for symbol in symbols %}
+                                <option value="{{ symbol }}">{{ symbol }}</option>
+                            {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <button class="btn btn-custom w-100" type="submit">Change</button>
+                </div>
+            </form>
+        </div>
+        <div class="settings-section stats-card">
+            <h4>Change password</h4>
+            <form action="/settings" method="post">
+                <input autocomplete="off" class="form-control mx-auto w-auto mb-3" name="old_password" placeholder="Old password" type="password">
+                <input autocomplete="off" class="form-control mx-auto w-auto mb-3" name="new_password" placeholder="New password" type="password">
+                <input autocomplete="off" class="form-control mx-auto w-auto mb-3" name="confirm_password" placeholder="Confirm password" type="password">
+                <button class="btn btn-custom w-100" type="submit">Change password</button>
+            </form>
+        </div>
+        <div class="inline_buttons settings-section stats-card">
+            <a href="/history"><button class="btn btn-custom w-100" type="button">History</button></a>
+            <a href="/"><button class="btn btn-custom w-100" type="button">Dashboard</button></a>
+        </div>
+    </div>
+{% endblock %}
